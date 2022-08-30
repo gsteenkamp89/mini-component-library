@@ -5,14 +5,16 @@ import styled, { css } from "styled-components";
 import { COLORS } from "../../constants";
 import VisuallyHidden from "../VisuallyHidden";
 
-const ProgressBar = ({ value, size }) => {
+const ProgressBar = ({ value, size, ...rest }) => {
   return (
     <Wrapper
       role="progressbar"
       aria-label="progress bar"
+      aria-valuenow={value}
       aria-valuemin={0}
       aria-valuemax={100}
       size={size}
+      {...rest}
     >
       <VisuallyHidden>
         <label for="progressbar">Progress Bar</label>
