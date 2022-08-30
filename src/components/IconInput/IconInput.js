@@ -1,5 +1,4 @@
 import React from "react";
-import { Edit } from "react-feather";
 import styled, { css } from "styled-components";
 
 import { COLORS } from "../../constants";
