@@ -65,8 +65,7 @@ const CustomTrigger = styled.div`
   color: ${COLORS.gray700};
 
   ${SelectOverlay}:focus + & {
-    outline: 1px dotted #121212;
-    outline: 2px auto -webkit-focus-ring-color;
+    outline: 2px solid ${COLORS.primary};
   }
 `;
 
