@@ -7,7 +7,17 @@ import VisuallyHidden from "../VisuallyHidden";
 
 const ProgressBar = ({ value, size }) => {
   return (
-    <Wrapper size={size}>
+    <Wrapper
+      role="progressbar"
+      aria-label="progress bar"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      size={size}
+    >
+      <VisuallyHidden>
+        <label for="progressbar">Progress Bar</label>
+      </VisuallyHidden>
+
       <BarWrapper size={size}>
         <Bar value={value} />
       </BarWrapper>
@@ -49,8 +59,9 @@ const BarWrapper = styled.div`
   border-radius: inherit;
 `;
 
-const Bar = styled.div`
+const Bar = styled.span`
   background-color: ${COLORS.primary};
+  display: block;
   height: 100%;
   left: 0;
   top: 0;
