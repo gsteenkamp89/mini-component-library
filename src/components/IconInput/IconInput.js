@@ -6,27 +6,42 @@ import { COLORS } from "../../constants";
 import Icon from "../Icon";
 import VisuallyHidden from "../VisuallyHidden";
 
-const ICON_PROPS = {
+const SIZE_PROPS = {
   small: {
-    size: 16,
-    paddingBottom: 5, // 4 + 1 (border width)
+    iconSize: 16,
+    iconSpacing: 4, // 4 + 1 (border width)
+    height: 24,
+    fontSize: 14,
+    borderWidth: 1,
   },
   large: {
-    size: 24,
-    paddingBottom: 8, // 7 + 2 (border width)
+    iconSize: 24,
+    iconSpacing: 6, // 7 + 2 (border width)
+    height: 36,
+    fontSize: 18,
+    borderWidth: 2,
   },
 };
 
 const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
   const isEmail = icon === "at sign";
-  const iconProps = ICON_PROPS[size];
+  const iconProps = SIZE_PROPS[size];
 
   return (
-    <Wrapper width={width} size={size}>
+    <Wrapper
+      style={{
+        "--height": iconProps.height + "px",
+        "--font-size": iconProps.fontSize + "px",
+        "--border-width": iconProps.borderWidth + "px",
+        "--icon-spacing": iconProps.iconSpacing + "px",
+      }}
+      width={width}
+      size={size}
+    >
       <VisuallyHidden>
         <label id="input-label">{label}</label>
       </VisuallyHidden>
-      <StyledIcon id={icon} {...iconProps} />
+      <StyledIcon id={icon} size={iconProps.iconSize} />
       <Input
         aria-labelledby="input-label"
         size={size}
@@ -40,27 +55,12 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
 const StyledIcon = styled(Icon)`
   position: absolute;
   left: 0;
-  bottom: ${(p) => p.paddingBottom}px;
+  bottom: var(--icon-spacing);
   pointer-events: none;
   color: currentColor;
 `;
 
-const smallStyles = css`
-  font-size: 14px;
-  padding: 4px 0;
-  border-bottom: 1px solid ${COLORS.black};
-  padding-left: 24px;
-`;
-
-const largeStyles = css`
-  font-size: 18px;
-  padding: 7px 0;
-  border-bottom: 2px solid ${COLORS.black};
-  padding-left: 36px;
-`;
-
 const Input = styled.input`
-  padding: 0;
   outline: none;
   width: 100%;
   border: none;
@@ -68,9 +68,8 @@ const Input = styled.input`
   color: inherit;
   font-weight: 700;
   font-size: inherit;
-
-  ${(p) => p.size === "small" && smallStyles};
-  ${(p) => p.size === "large" && largeStyles};
+  padding-left: var(--height);
+  height: var(--height);
 
   &::placeholder {
     color: ${COLORS.gray500};
@@ -78,8 +77,10 @@ const Input = styled.input`
   }
 
   &:focus {
-    outline: 2px solid ${COLORS.primary};
-    outline-offset: 2px;
+    outline: var(--border-width) solid ${COLORS.primary};
+    outline-offset: calc(
+      var(--border-width) * 2
+    ); // must account for underline border while using border-box
     border-radius: 2px;
   }
 `;
@@ -89,6 +90,8 @@ const Wrapper = styled.div`
   width: ${(p) => p.width}px;
   height: fit-content;
   position: relative;
+  font-size: var(--font-size);
+  border-bottom: var(--border-width) solid ${COLORS.black};
 
   &:hover {
     color: ${COLORS.black};
