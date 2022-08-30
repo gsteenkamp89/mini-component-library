@@ -49,14 +49,14 @@ const smallStyles = css`
   font-size: 14px;
   padding: 4px 0;
   border-bottom: 1px solid ${COLORS.black};
-  padding-left: 28px;
+  padding-left: 24px;
 `;
 
 const largeStyles = css`
   font-size: 18px;
   padding: 7px 0;
   border-bottom: 2px solid ${COLORS.black};
-  padding-left: 32px;
+  padding-left: 36px;
 `;
 
 const Input = styled.input`
