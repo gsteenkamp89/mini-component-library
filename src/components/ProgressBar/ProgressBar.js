@@ -43,7 +43,6 @@ const largeStyles = css`
 
 const Wrapper = styled.div`
   width: 100%;
-  min-width: 370px;
   overflow: hidden;
   box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
   background-color: ${COLORS.transparentGray15};
